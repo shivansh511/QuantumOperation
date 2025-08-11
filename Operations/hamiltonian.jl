@@ -16,13 +16,20 @@ function TFI(N::Int, dim::Int=2)
     println(matrix_list)
     matrix_list=circshift(matrix_list,1)
     println(matrix_list)
-    #=
-    for i 1:N-1
+    
+    for i in 1:N-1
         H += foldl(kron, matrix_list)
         matrix_list = circshift(matrix_list, 1)
     end
-    =#
-
+    
+    return H
 end
 
-TFI(4)
+struct system
+    N::Int
+    H::Matrix{ComplexF64}
+end
+
+sys=system( 2, TFI(2))
+
+println(sys.H)
